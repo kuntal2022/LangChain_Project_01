@@ -1,0 +1,21 @@
+# Secret keys
+.env
+
+# Virtual environment
+myenv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# VS Code settings
+.vscode/
+
+# Mac faltu file
+.DS_Store
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
