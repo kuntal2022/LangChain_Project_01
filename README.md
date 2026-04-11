@@ -14,8 +14,8 @@ My first step into AI APIs. Learned how to call OpenAI:
 
 ---
 
-### 2. 📄 CV Analyzer — Parallel Chains
-Upload your CV and paste a Job Description — get an AI-powered match score!
+### 2. 📄 CV Analyzer (ATS Tool) — Parallel Chains
+Upload your CV and paste a Job Description — get an AI-powered ATS match score!
 
 **Features:**
 - Upload CV as PDF or DOCX
