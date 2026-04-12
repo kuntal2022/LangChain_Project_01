@@ -134,3 +134,24 @@ streamlit run movie_recommendation.py
 ---
 
 ⭐ If you found this helpful, give it a star!
+
+---
+
+### 5. 📱 Customer Personalized SMS Generator — Branch Chains
+Upload a customer CSV — get AI-generated personalized SMS for each customer segment!
+
+**Features:**
+- Upload customer CSV file
+- Auto-detects RFM Segment (Champion, At_Risk, Lost)
+- Unique combination of Nationality + Vintage + Customer Bucket
+- Personalized SMS for each unique combination
+- Timer shows how long it takes
+- Final SMS table displayed
+
+**Tech Used:**
+- `RunnableBranch` — Different SMS strategy for each RFM segment
+- `with_structured_output` — Pydantic BaseModel for RFM detection
+- `RunnableLambda` — Convert object to dict
+- Pandas — CSV reading + unique combinations
+- GPT-4o-mini
+- Streamlit UI
