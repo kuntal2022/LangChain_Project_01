@@ -67,6 +67,27 @@ Give a one-liner story — get movie recommendations based on the genre!
 
 ---
 
+### 5. 📱 Customer Personalized SMS Generator — Branch Chains
+Upload a customer CSV — get AI-generated personalized SMS for each customer segment!
+
+**Features:**
+- Upload customer CSV file
+- Auto-detects RFM Segment (Champion, At_Risk, Lost)
+- Unique combination of Nationality + Vintage + Customer Bucket
+- Personalized SMS for each unique combination
+- Timer shows processing time
+- Final SMS exported to Excel
+
+**Tech Used:**
+- `RunnableBranch` — Different SMS strategy for each RFM segment
+- `with_structured_output` — Pydantic BaseModel for RFM detection
+- `RunnableLambda` — Convert object to dict
+- Pandas — CSV reading + unique combinations
+- GPT-4o-mini
+- Streamlit UI
+
+---
+
 ## 🛠️ Tech Stack
 
 | Technology | Use |
@@ -78,6 +99,7 @@ Give a one-liner story — get movie recommendations based on the genre!
 | 📄 PyMuPDF | PDF reading |
 | 📝 python-docx | DOCX reading |
 | 🔐 python-dotenv | API key management |
+| 🐼 Pandas | Data processing |
 
 ---
 
@@ -91,7 +113,7 @@ git clone https://github.com/your-username/your-repo.git
 cd your-repo
 
 # Install dependencies
-pip install langchain langchain-openai streamlit python-dotenv pymupdf python-docx pydantic
+pip install langchain langchain-openai langchain-community streamlit python-dotenv pymupdf python-docx pydantic pandas openpyxl
 ```
 
 ---
@@ -112,6 +134,7 @@ OPENAI_API_KEY=your-api-key-here
 streamlit run cv_analyzer.py
 streamlit run emotion_detector.py
 streamlit run movie_recommendation.py
+streamlit run sms_generation.py
 ```
 
 ---
@@ -135,16 +158,16 @@ streamlit run movie_recommendation.py
 Built a full Streamlit documentation page covering:
 
 **Generator Function**
-- `yield` vs `return` — yield pauses, return ends
-- `next()` — ek ek karke value nikalna
-- Generator object — memory efficient
-- Real examples — Fibonacci series, String generator
+- `yield` vs `return` — yield pauses the function, return ends it
+- `next()` — retrieves values one by one from a generator
+- Generator object — memory efficient, does not load all data at once
+- Real examples — Fibonacci series, String character generator
 
 ```python
 # Generator example
 def my_gen(n):
     for i in range(n):
-        yield i  # ek ek karke deta hai
+        yield i  # returns one value at a time
 
 g = my_gen(100)
 print(next(g))  # 0
@@ -152,13 +175,13 @@ print(next(g))  # 1
 ```
 
 **Iterator vs Iterable**
-- Iterable — jo `iter()` mein daal sako (list, string, tuple)
-- Iterator — jo `next()` se chale
-- `iter()` — Iterable ko Iterator mein convert karna
+- Iterable — any object that can be passed to `iter()` (list, string, tuple)
+- Iterator — any object that works with `next()`
+- `iter()` — converts an Iterable into an Iterator
 
 **Connection to LangChain**
-- `lazy_load()` bhi ek generator hai
-- Badi PDF files ek ek page load karta hai — memory efficient!
+- `lazy_load()` is also a generator
+- Loads large PDF files one page at a time — memory efficient!
 
 ---
 
@@ -179,36 +202,36 @@ Learned `langchain_community` document loaders:
 ### load() vs lazy_load()
 
 ```python
-# load() — sab ek saath memory mein
-docs = loader.load()           # ❌ badi files ke liye heavy
+# load() — loads everything into memory at once
+docs = loader.load()           # heavy for large files
 
-# lazy_load() — generator — ek ek karke
-for doc in loader.lazy_load(): # ✅ memory efficient
+# lazy_load() — generator — loads one page at a time
+for doc in loader.lazy_load(): # memory efficient
     print(doc.page_content)
 ```
 
-**lazy_load() generator hai** — isliye badi PDFs ke liye best!
+`lazy_load()` is a generator — best for large PDFs as it loads one page at a time without filling up memory.
 
-### PDF Loader Guide — Konsa Use Karein?
+### PDF Loader Guide — Which One to Use?
 
 | Situation | Best Loader |
 |---|---|
-| Normal text PDF | `PyPDFLoader` |
-| PDF mein tables hain | `PDFPlumberLoader` |
-| PDF mein images/scanned hain | `UnstructuredPDFLoader` (OCR) |
+| Normal text-based PDF | `PyPDFLoader` |
+| PDF with tables | `PDFPlumberLoader` |
+| Scanned / Image PDF | `UnstructuredPDFLoader` (uses OCR) |
 | Excel file | `pandas.read_excel()` |
-| CSV file | `CSVLoader` ya `pandas.read_csv()` |
+| CSV file | `CSVLoader` or `pandas.read_csv()` |
 
 ```python
-# Text PDF
+# Text-based PDF
 from langchain_community.document_loaders import PyPDFLoader
 loader = PyPDFLoader("file.pdf")
 
-# Tables wala PDF
+# PDF with tables
 from langchain_community.document_loaders import PDFPlumberLoader
 loader = PDFPlumberLoader("file.pdf")
 
-# Scanned / Image PDF — OCR lagta hai
+# Scanned or image-based PDF — requires OCR
 from langchain_community.document_loaders import UnstructuredPDFLoader
 loader = UnstructuredPDFLoader("file.pdf")
 
@@ -216,11 +239,11 @@ loader = UnstructuredPDFLoader("file.pdf")
 from langchain_community.document_loaders import Docx2txtLoader
 loader = Docx2txtLoader("file.docx")
 
-# Directory — poora folder ek saath
+# Entire folder at once
 from langchain_community.document_loaders import DirectoryLoader
 loader = DirectoryLoader("./folder/", glob="**/*.pdf")
 
-# CSV
+# CSV file
 from langchain_community.document_loaders import CSVLoader
 loader = CSVLoader("file.csv")
 ```
@@ -234,24 +257,3 @@ loader = CSVLoader("file.csv")
 ---
 
 ⭐ If you found this helpful, give it a star!
-
----
-
-### 5. 📱 Customer Personalized SMS Generator — Branch Chains
-Upload a customer CSV — get AI-generated personalized SMS for each customer segment!
-
-**Features:**
-- Upload customer CSV file
-- Auto-detects RFM Segment (Champion, At_Risk, Lost)
-- Unique combination of Nationality + Vintage + Customer Bucket
-- Personalized SMS for each unique combination
-- Timer shows how long it takes
-- Final SMS table displayed
-
-**Tech Used:**
-- `RunnableBranch` — Different SMS strategy for each RFM segment
-- `with_structured_output` — Pydantic BaseModel for RFM detection
-- `RunnableLambda` — Convert object to dict
-- Pandas — CSV reading + unique combinations
-- GPT-4o-mini
-- Streamlit UI
