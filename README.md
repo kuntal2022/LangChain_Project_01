@@ -124,6 +124,106 @@ streamlit run movie_recommendation.py
 - Structured outputs with Pydantic
 - Building Streamlit UIs
 - Managing API keys securely with `.env` and `.gitignore`
+- Generator, Iterator, Iterable in Python
+- LangChain Document Loaders — PDF, DOCX, TXT, CSV, Directory
+
+---
+
+## 🐍 Python Concepts Documented
+
+### Generator, Iterator, Iterable
+Built a full Streamlit documentation page covering:
+
+**Generator Function**
+- `yield` vs `return` — yield pauses, return ends
+- `next()` — ek ek karke value nikalna
+- Generator object — memory efficient
+- Real examples — Fibonacci series, String generator
+
+```python
+# Generator example
+def my_gen(n):
+    for i in range(n):
+        yield i  # ek ek karke deta hai
+
+g = my_gen(100)
+print(next(g))  # 0
+print(next(g))  # 1
+```
+
+**Iterator vs Iterable**
+- Iterable — jo `iter()` mein daal sako (list, string, tuple)
+- Iterator — jo `next()` se chale
+- `iter()` — Iterable ko Iterator mein convert karna
+
+**Connection to LangChain**
+- `lazy_load()` bhi ek generator hai
+- Badi PDF files ek ek page load karta hai — memory efficient!
+
+---
+
+## 📂 LangChain Document Loaders
+
+Learned `langchain_community` document loaders:
+
+### Loaders Covered
+
+| Loader | File Type | Best For |
+|---|---|---|
+| `TextLoader` | `.txt` | Plain text files |
+| `Docx2txtLoader` | `.docx` | Word documents |
+| `PyPDFLoader` | `.pdf` | Text-based PDFs |
+| `DirectoryLoader` | Folder | Multiple files at once |
+| `CSVLoader` | `.csv` | CSV data files |
+
+### load() vs lazy_load()
+
+```python
+# load() — sab ek saath memory mein
+docs = loader.load()           # ❌ badi files ke liye heavy
+
+# lazy_load() — generator — ek ek karke
+for doc in loader.lazy_load(): # ✅ memory efficient
+    print(doc.page_content)
+```
+
+**lazy_load() generator hai** — isliye badi PDFs ke liye best!
+
+### PDF Loader Guide — Konsa Use Karein?
+
+| Situation | Best Loader |
+|---|---|
+| Normal text PDF | `PyPDFLoader` |
+| PDF mein tables hain | `PDFPlumberLoader` |
+| PDF mein images/scanned hain | `UnstructuredPDFLoader` (OCR) |
+| Excel file | `pandas.read_excel()` |
+| CSV file | `CSVLoader` ya `pandas.read_csv()` |
+
+```python
+# Text PDF
+from langchain_community.document_loaders import PyPDFLoader
+loader = PyPDFLoader("file.pdf")
+
+# Tables wala PDF
+from langchain_community.document_loaders import PDFPlumberLoader
+loader = PDFPlumberLoader("file.pdf")
+
+# Scanned / Image PDF — OCR lagta hai
+from langchain_community.document_loaders import UnstructuredPDFLoader
+loader = UnstructuredPDFLoader("file.pdf")
+
+# Word Document
+from langchain_community.document_loaders import Docx2txtLoader
+loader = Docx2txtLoader("file.docx")
+
+# Directory — poora folder ek saath
+from langchain_community.document_loaders import DirectoryLoader
+loader = DirectoryLoader("./folder/", glob="**/*.pdf")
+
+# CSV
+from langchain_community.document_loaders import CSVLoader
+loader = CSVLoader("file.csv")
+```
 
 ---
 
