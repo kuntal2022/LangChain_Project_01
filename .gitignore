@@ -19,3 +19,9 @@ __pycache__/
 
 # Jupyter notebooks checkpoints
 .ipynb_checkpoints/
+
+
+
+chroma_db/            # Vector store
+faiss_index/          # FAISS index
+
