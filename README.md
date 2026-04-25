@@ -250,6 +250,52 @@ loader = CSVLoader("file.csv")
 
 ---
 
+---
+
+### 6. 📚 Multi-Books RAG — Question Answering System
+
+Ask questions across **7 ML/AI books** and get context-aware answers with full chat history support.
+
+**Books Covered:**
+- Building Machine Learning Systems with Python
+- Deep Learning from Scratch
+- Machine Learning for Mathematics
+- ML CookBook
+- Must-Read on AI Agents
+- Pandas Datetime Book
+- Practical Statistics for Data Scientists
+
+**Features:**
+- Ask any question — answer comes strictly from the books
+- Multi-turn chat history (remembers previous questions)
+- Smart chunk size auto-detection using token statistics
+- Duplicate/irrelevant chunk filtering via MMR search
+
+**How it works:**
+1. PDFs loaded via `DirectoryLoader` + `PyMuPDFLoader`
+2. Text cleaned — page numbers, extra whitespace removed
+3. Best chunk size auto-calculated using `tiktoken` token distribution
+4. Chunks embedded via `HuggingFace (all-MiniLM-L6-v2)` → stored in `FAISS`
+5. `MultiQueryRetriever` generates 3 alternate queries via **Gemini 2.5 Pro**
+6. Top-5 diverse chunks fetched via MMR search
+7. **Grok-3-fast** generates final answer from context + chat history
+
+**Tech Used:**
+| Component | Technology |
+|---|---|
+| Document Loading | `DirectoryLoader` + `PyMuPDFLoader` |
+| Embeddings | `HuggingFace all-MiniLM-L6-v2` |
+| Vector Store | `FAISS` (persisted locally) |
+| Retriever | `MultiQueryRetriever` (MMR, k=5) |
+| Query LLM | `Gemini 2.5 Pro` |
+| Answer LLM | `Grok-3-fast` (xAI) |
+| Chat History | `HumanMessage` + `AIMessage` (file-persisted) |
+| UI | `Streamlit` — `st.chat_message` |
+
+**LCE Chain Flow:**
+
+
+
 ## 👨‍💻 Author
 
 **Kuntal** — Learning AI one project at a time 🚀
