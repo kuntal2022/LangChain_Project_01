@@ -295,11 +295,97 @@ Ask questions across **7 ML/AI books** and get context-aware answers with full c
 **LCE Chain Flow:**
 
 
-
-## 👨‍💻 Author
-
-**Kuntal** — Learning AI one project at a time 🚀
-
 ---
+ 
+### 7. 💰 AI Model Pricing Reference
+A Streamlit reference app covering pricing for all major AI providers.
+ 
+**Providers Covered:**
+- 🟢 **OpenAI** — GPT-4o, GPT-4.1, embeddings, Whisper, TTS, DALL·E, GPT-Image-1
+- 🔴 **Groq** — Llama, Qwen, GPT-OSS models with speed benchmarks
+- 🔵 **Google Gemini** — Gemini 2.5 / 3.x, embedding, TTS, image generation
+- 🟠 **Sarvam AI** — Indian language models, Bulbul TTS, Saaras STT
+- 🤗 **HuggingFace** — Free open-source embedding models for RAG
+**Features:**
+- Separate section for Chat, Embedding, Audio, and Image models
+- Cost per 1M tokens for every model
+- **"Model String (copy-paste)"** column — exact API string ready to use
+- HuggingFace embedding model cards with dimensions, size, and best use case
+**Tech Used:**
+- Streamlit
+- Pandas DataFrames
+---
+ 
+## 🛠️ Tech Stack
+ 
+| Technology | Use |
+|---|---|
+| 🦜 LangChain | Chains, Runnables, Prompts |
+| 🤖 OpenAI API | GPT-4o, GPT-4o-mini, GPT-4.1 |
+| 🖥️ Streamlit | UI for all projects |
+| 🐍 Pydantic | Structured outputs |
+| 📄 PyMuPDF | PDF reading |
+| 📝 python-docx | DOCX reading |
+| 📊 openpyxl | Excel export |
+| 🔐 python-dotenv | API key management |
+ 
+---
+ 
+## 📦 Installation
+ 
+```bash
+# Clone the repo
+git clone https://github.com/kuntal2022/LangChain_Project_01.git
+ 
+# Go to project folder
+cd LangChain_Project_01
+ 
+# Install dependencies
+pip install langchain langchain-openai streamlit python-dotenv pymupdf python-docx pydantic openpyxl
+```
+ 
+---
+ 
+## 🔐 Setup
+ 
+Create a `.env` file in the root folder:
+ 
+```
+OPENAI_API_KEY=your-api-key-here
+```
+ 
+---
+ 
+## ▶️ Run any project
+ 
+```bash
+streamlit run cv_analyzer.py
+streamlit run emotion_detector.py
+streamlit run movie_recommendation.py
+streamlit run sms_generator.py
+streamlit run ai_model_pricing.py
+```
+ 
+---
+ 
+## 📚 What I Learned
+ 
+- How OpenAI API works — endpoints, payloads, headers
+- Difference between SDK and raw API requests
+- LangChain Runnables — `RunnableParallel`, `RunnableBranch`, `RunnableLambda`, `RunnablePassthrough`
+- Structured outputs with Pydantic
+- Document loaders — PDF, DOCX, CSV, Directory
+- load() vs lazy_load() — generators and memory efficiency
+- Building Streamlit UIs
+- Managing API keys securely with `.env` and `.gitignore`
+- AI model pricing across OpenAI, Groq, Gemini, Sarvam, HuggingFace
+---
+ 
+## 👨‍💻 Author
+ 
+**Kuntal** — Learning AI one project at a time 🚀
+ 
+---
+
 
 ⭐ If you found this helpful, give it a star!
