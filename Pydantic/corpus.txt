@@ -1,0 +1,23 @@
+Chapter 1: The Silent Signal
+
+Arjun Mehta had always believed that data told stories. Numbers were not just digits; they were signals waiting to be understood. On a humid evening in Mumbai, he sat by the window of his small apartment, staring at his laptop screen.
+
+The email from Horizon Analytics had arrived at exactly 7:42 PM.
+
+"We are pleased to inform you that you have been shortlisted for the final round," it read.
+
+Arjun leaned back in his chair. His heart was racing. For three years, he had worked tirelessly at a mid-sized retail company, building predictive models that most people barely understood. His colleagues admired his technical skills, but management rarely acknowledged the deeper impact of his work.
+
+Outside, the city buzzed with life. Auto-rickshaws honked impatiently, street vendors negotiated loudly, and the faint aroma of masala chai drifted through the balcony.
+
+His phone vibrated. It was a message from Priya.
+
+"Did you check your email?" she asked.
+
+Arjun smiled. "Yes. This might change everything."
+
+But he knew better than to celebrate too soon. Interviews were unpredictable. Algorithms could be tuned; human decisions could not.
+
+He opened his notebook and began reviewing concepts: probability distributions, gradient boosting, transformer architectures, and vector embeddings. If this opportunity slipped away, it would not be because he was unprepared.
+
+At 10:15 PM, as the rain finally began to fall over Mumbai, Arjun closed his laptop and whispered to himself, "Tomorrow, I compete with the best."
